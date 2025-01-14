@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 const initialGameBoard = [
   [null, null, null],
@@ -7,22 +7,34 @@ const initialGameBoard = [
 ];
 console.log(initialGameBoard);
 
-export default function GameBoard({onSelectSquare,activePlayerSymbol}) {
-  const [gameBoard, setGameBoard] = useState(initialGameBoard);
+export default function GameBoard({onSelectSquare,turns}) {
+  let gameBoard = initialGameBoard;
+  for(const turn of turns){
+    // const {square,player} = turn;
+const square = turn.square;
+const player = turn.player;
+    // const {row,col} = square;
+    const row = square.row;
+    const col = square.col;
 
-  function handleSelectSquare(rowIndex, colIndex) {
-    // const updatedGameBoard = [...gameBoard.map((innerArray) => [...innerArray])]
-
-    setGameBoard((prevGameBoard) => {
-      const updatedGameBoard = [...prevGameBoard.map((innerArray) => [...innerArray])]
-      updatedGameBoard[rowIndex][colIndex] = activePlayerSymbol;
-      return updatedGameBoard;
-    });
-
-    onSelectSquare();
-
-    //    console.log(gameBoard)
+    gameBoard[row][col] = player;
   }
+
+  // const [gameBoard, setGameBoard] = useState(initialGameBoard);
+
+  // function handleSelectSquare(rowIndex, colIndex) {
+  //   // const updatedGameBoard = [...gameBoard.map((innerArray) => [...innerArray])]
+
+  //   setGameBoard((prevGameBoard) => {
+  //     const updatedGameBoard = [...prevGameBoard.map((innerArray) => [...innerArray])]
+  //     updatedGameBoard[rowIndex][colIndex] = activePlayerSymbol;
+  //     return updatedGameBoard;
+  //   });
+
+  //   onSelectSquare();
+
+  //   //    console.log(gameBoard)
+  // }
 
   return (
     <ol id="game-board">
@@ -34,7 +46,7 @@ export default function GameBoard({onSelectSquare,activePlayerSymbol}) {
                 return (
                   <li key={colIndex}>
                     <button
-                      onClick={() => handleSelectSquare(rowIndex, colIndex)}
+                      onClick={() => onSelectSquare(rowIndex, colIndex)}
                     >
                       {playerSymbol}
                     </button>
