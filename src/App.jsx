@@ -139,6 +139,7 @@ function handlePlayerNameChange(symbol,NewName){
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
       <Logs gameTurns={gameTurns} />
+{/*      remote commit */}
     </main>
   );
 }
